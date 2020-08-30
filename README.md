@@ -9,4 +9,4 @@ A technical project that allows you to design original urban solutions.
 ### Setup:
 \\\
 ## Feedback
-Any comments and suggestions are accepted by [mail](sergeo.sss@yandex.ru) 
+Any comments and suggestions are accepted by mail sergeo.sss@yandex.ru
