@@ -2,6 +2,10 @@
 ---
 A technical project that allows you to design original urban solutions.
 
-## Getting Started
----
-### Downloading the project
+## Getting Started!
+\\\
+### Downloading the project:
+\\\
+### Setup:
+\\\
+## Feedback
