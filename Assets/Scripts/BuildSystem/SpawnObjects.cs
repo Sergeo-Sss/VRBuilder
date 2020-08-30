@@ -11,41 +11,37 @@ public class SpawnObjects : MonoBehaviour
     [Header("Объекты")]
     public GameObject[] _objs;
 
+    [Header("Материал эмулятора")]
     public Material[] _materials;
+
+    [Header("Меню")]
+    public GameObject MainMenu;
+
     private LineRenderer lr;
     private int dn;
+    private MainMenu mainMenu;
 
-    public void SetValue(int number)
-    {
-        dn = number;
-    }
+
     private void Start()
     {
-     
+        dn = -2;
+        mainMenu = GetComponent<MainMenu>();
+  //      dn = MainMenu.gameObject.GetComponent<ObjectInt>();
         lr = GetComponent<LineRenderer>();
+        
         for (int i = 0; i < _emki.Length; i++)
         {
             _emki[i].SetActive(false);
             _emki[i].transform.GetComponent<MeshRenderer>().material = _materials[0];
         }
-        dn = -2;
+       
         Null();
     }
     public void Null()
     { }
     private void Update()
     {
-        /////////////////////////////////////////////
-        if (OVRInput.Get(OVRInput.Button.Three))
-        {
-            dn = 0;
-        }
-        if (OVRInput.Get(OVRInput.Button.Four))
-        {
-            dn = 1;
-        }
-        /////////////////////////////////////////////
-        if (dn== -2)
+        if (dn == -2)
         {
             lr.enabled = false;
             Start();
@@ -58,6 +54,7 @@ public class SpawnObjects : MonoBehaviour
 
     public void SpawnSss()
     {
+        dn = mainMenu.HitInt;
         for (int i = 0; i < _emki.Length; i++)
         {
             _emki[i].SetActive(false);
@@ -76,7 +73,7 @@ public class SpawnObjects : MonoBehaviour
             {
                 _emki[dn].transform.position = new Vector3(hit.point.x, (Vector3.Scale(_emki[dn].GetComponent<MeshFilter>().sharedMesh.bounds.size, _emki[dn].transform.lossyScale).y / 2), hit.point.z);
                 //  _emki[dn.num].transform.GetComponent<MeshRenderer>().material = _materials[0];
-                if (OVRInput.Get(OVRInput.Button.One)) //начало проектировки, инпут стима
+                if (OVRInput.GetDown(OVRInput.Button.One)|| Input.GetKey(KeyCode.T)) //начало проектировки, инпут стима
                 {
                     Instantiate(_objs[dn], _emki[dn].transform.position, _emki[dn].transform.rotation);
                 }
@@ -98,7 +95,7 @@ public class SpawnObjects : MonoBehaviour
 
             lr.SetPosition(1, transform.forward * 5000);
         }
-        if (OVRInput.Get(OVRInput.Button.Two)) //конец проектировки инпут стима
+        if (OVRInput.GetDown(OVRInput.Button.Two)|| Input.GetKey(KeyCode.R)) //конец проектировки инпут стима
         {
             dn = -2;
         }

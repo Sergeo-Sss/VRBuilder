@@ -6,6 +6,7 @@ TagManager:
   tags:
   - unit
   - floor
+  - Button
   layers:
   - Default
   - TransparentFX
