@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Oculus;
 
 public class SpawnObjects : MonoBehaviour
 {
@@ -27,12 +28,23 @@ public class SpawnObjects : MonoBehaviour
             _emki[i].SetActive(false);
             _emki[i].transform.GetComponent<MeshRenderer>().material = _materials[0];
         }
+        dn = -2;
         Null();
     }
     public void Null()
     { }
     private void Update()
     {
+        /////////////////////////////////////////////
+        if (OVRInput.Get(OVRInput.Button.Three))
+        {
+            dn = 0;
+        }
+        if (OVRInput.Get(OVRInput.Button.Four))
+        {
+            dn = 1;
+        }
+        /////////////////////////////////////////////
         if (dn== -2)
         {
             lr.enabled = false;
@@ -64,7 +76,7 @@ public class SpawnObjects : MonoBehaviour
             {
                 _emki[dn].transform.position = new Vector3(hit.point.x, (Vector3.Scale(_emki[dn].GetComponent<MeshFilter>().sharedMesh.bounds.size, _emki[dn].transform.lossyScale).y / 2), hit.point.z);
                 //  _emki[dn.num].transform.GetComponent<MeshRenderer>().material = _materials[0];
-                if (Input.GetKeyDown(KeyCode.Space)) //инпут стима
+                if (OVRInput.Get(OVRInput.Button.One)) //начало проектировки, инпут стима
                 {
                     Instantiate(_objs[dn], _emki[dn].transform.position, _emki[dn].transform.rotation);
                 }
@@ -86,7 +98,7 @@ public class SpawnObjects : MonoBehaviour
 
             lr.SetPosition(1, transform.forward * 5000);
         }
-        if (Input.GetKeyDown(KeyCode.N)) //конец проектировки инпут стима
+        if (OVRInput.Get(OVRInput.Button.Two)) //конец проектировки инпут стима
         {
             dn = -2;
         }
